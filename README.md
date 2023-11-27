@@ -1,2 +1,2 @@
-# ECS-blue-green-deployment
-build docker images and deploy using ECS
+# Using Amazon ECS blue-green deployment
+In this Project we build docker images and deploy using Elastic Container service.
