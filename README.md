@@ -5,6 +5,13 @@ A blue/green deployment strategy is a method of updating an existing application
 
 In this Project we build docker images and deploy using Elastic Container service.
 
+## Environment Before Deployment:
+
+![Environment Before](/ECS-blue-green-deployment/img/env_before.png)
+
+## Environment After Deployment
+![Environment After](/ECS-blue-green-deployment/img/enc_after.png)
+
 ## Pre-configured resources for this project:
 
 ## Networking configuration:
@@ -317,6 +324,144 @@ Notice that you have set Desired tasks to zero. A service with zero tasks will n
 Notice that the blue service has two running tasks and the green service has zero.
 
 In this step, you created two services for your blue and green applications. You learned how these services control the desired capacity. You started two tasks for the blue application upon service creation. These tasks launched and registered two container instances.
+
+## Step 7: Viewing Instances and the Application's Message
+Now that you have put all of the pieces in place to build and store Docker images, dynamically register container instances, and maintain a target capacity, it is time to learn more about the interdependent service actions and see some results.
+
+In this step, you will view the resources launched by Amazon ECS and access the blue application launched when you created the blue service.
+
+### observe the Host EC2 instance:
+1. In the search bar at the top of the AWS Management Console, enter EC2, and under Services, click the EC2 result:
+
+2. To view Amazon EC2 instances, in the left-hand menu, under Instances, click Instances:
+
+You will see one running instance named _ecs-instance_:
+This instance was launched by the Amazon EC2 Auto Scaling group that we configured before as part of the setup of this project.
+
+### observe the container instances deployed by the ECS service:
+3. To list load-balancing target groups, in the left-hand menu, under Load Balancing, click Target Groups:
+
+You will see one target group listed named <Your_target_group_name>.
+
+4. To see details of the target group, under Name, click <Your_target_group_name> :
+
+Observe the Registered targets table on the Targets tab:
+
+Notice that you have two healthy targets despite having only one running EC2 instance. ECS deployed two container instances on the EC2 host instance. Each container instance is dynamically registered with the target group on an assigned port in the ephemeral port range.
+
+### Test the Blue application:
+5. To navigate to load balancers, in the left-hand menu, under Load Balancing, click Load Balancers:
+
+6. To view details of the load balancer, under Name, click <Your_ALB_name>:
+
+7. Under DNS name, click the copy icon to copy the DNS name of the load balancer to your clipboard:
+
+8. In a new browser tab, paste the DNS name, append /api/ to the end of it, and press enter:
+
+In response, your browser will display:
+```
+{"message": "Hello - I'm BLUE"}
+```
+
+The format or appearance may vary slightly depending on the browser you use. This is a simple JavaScript Object Notation (JSON) message delivered by the application running on the container instances.
+
+In this step, you looked at the resources created by your ECS services and tasks. You also looked at the end result of your application, a JSON message accessible through HTTP.
+
+## Step 8: Updating the Services and Application Deployments
+Now that you know how the services interact and how to launch tasks into your Amazon ECS cluster, it is time to switch from one application to the next. A blue-green deployment is a technique that uses two identical production environments to reduce downtime.
+
+In this step, you will launch both applications with all of the container instances you need, including a brief overlap period, to demonstrate the load balancer's round-robin distribution and container resource efficiency.
+
+### Update the desired task of green app:
+1. Navigate to the Clusters page of the Amazon ECS console.
+
+2. To access the cluster overview, click ecs-cluster:
+
+3. To select the green service, in the Services tab, click the checkbox next to ecs-green-service:
+
+4. To modify the green service, with it selected, click Update:
+
+5. Change Desired tasks from 0 to 2:
+
+6. To make this change take effect, at the bottom of the page, click Update:
+
+7. Return to the Target Groups section of the Amazon EC2 console and click <Your_target_group_nmme> to view details.
+
+You will now see four instances under Registered targets:
+
+The reduced resource requirements for a Docker container allow you to run multiple container instances on one EC2 instance. This works well for applications that require little resources, such as this simple message application.
+
+### Test the green application:
+
+8. Refresh your browser tab with the DNS name of the load balancer in the address bar.
+
+It may take several refreshes, but you will see the message change:
+
+```
+{"message": "Hello - I'm GREEN"}
+```
+Right now you have both versions of the application running in their own pair of container instances. 
+
+9. Return to the cluster overview page for your cluster in the Amazon ECS console.
+
+### Update the desired task of blue app:
+10. Select the ecs-blue-service and click Update:
+
+11. Reduce the Desired tasks field from 2 to 0, and click Update at the bottom of the page:
+
+Optional: Feel free to return to the target group page of the Amazon EC2 console and observe two of the registered targets being deregistered.
+
+12. Refresh your browser tab with the DNS name of the load balancer in the address bar several times.
+
+This time you will only see the message from the green application. It may take a couple of refreshes to see the change take effect.
+
+By swapping the desired tasks of each service, you have manually replicated a blue/green deployment.
+
+## Services used:
+All of the services used in this project (most prominently ECS, EC2, CodeBuild, and ECR) are well supported by the AWS command-line interface (CLI), AWS HTTP application programming interface (API), and AWS software development kits (SDK). Using these methods to create, configure, and operate the Amazon ECS and related services can result in fully automated deployments that are customized to your needs and workflow. 
+
+## Summary
+In this project, you used AWS CodeBuild along with Amazon Elastic Container Registry to build and store docker images. You then created a new Amazon Elastic Container Service cluster, and the ECS task definitions and ECS services necessary to perform a blue/green deployment. Finally, you verified that the deployments were working, and manually switched from blue to green versions of the application.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
