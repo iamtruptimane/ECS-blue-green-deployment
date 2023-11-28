@@ -7,10 +7,10 @@ In this Project we build docker images and deploy using Elastic Container servic
 
 ## Environment Before Deployment:
 
-![Environment Before](/ECS-blue-green-deployment/img/env_before.png)
+![Environment Before](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/env_before.png)
 
 ## Environment After Deployment
-![Environment After](/ECS-blue-green-deployment/img/enc_after.png)
+![Environment After](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/env_after.png)
 
 ## Pre-configured resources for this project:
 
@@ -52,9 +52,9 @@ In this Project we build docker images and deploy using Elastic Container servic
  ## Storage configuration:
  1. Amazon S3 bucket :  add object in s3 bucket
 
-    1. [ecs-blue](/ECS-blue-green-deployment/ecs-blue/)
+    1. [ecs-blue](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-blue)
     
-    2. [ecs-green](/ECS-blue-green-deployment/ecs-green/)
+    2. [ecs-green](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-green)
 
     _NOte : compress these files to zip and upload in Amazon s3 bucket._
 ## Step 1: Logging In to the Amazon Web Services Console
@@ -83,7 +83,7 @@ In this step, you will use CodeBuild to build the Docker images containing the t
 
 1. In the search bar at the top, enter CodeBuild, and under Services, click the CodeBuild result:
 
-The Build projects page of AWS Codebuild will build a project and that project builds a docker image from a zip file([ecs-blue](/ECS-blue-green-deployment/ecs-blue/), [ecs-green](/ECS-blue-green-deployment/ecs-green/)) stored in an Amazon S3 bucket.   
+The Build projects page of AWS Codebuild will build a project and that project builds a docker image from a zip file([ecs-blue](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-blue), [ecs-green](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-green)) stored in an Amazon S3 bucket.   
 
 You will create a two project named _ecs-blue-project_ and _ecs-green-project_   that is identical, except that they both uses a different zip file. Both projects will produce Docker images, tagged testblue and testgreen respectively. 
 
@@ -138,7 +138,7 @@ The Account ID is used to construct the ECR repository URI during the build proc
 9. To start building the blue project, click Start build:
 
 ### Build ecs-green-project:
- You will create a second project named _ecs-green-project_ that is identical to the blue project you just created, except that it uses a different zip file([ecs-green](/ECS-blue-green-deployment/ecs-green/))
+ You will create a second project named _ecs-green-project_ that is identical to the blue project you just created, except that it uses a different zip file([ecs-green](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-green))
 
  repeat all the step above except:
 
@@ -154,7 +154,7 @@ You have built two Docker images, a blue and green version of the same applicati
 
 You will see two images listed, named testgreen and testblue:
 
-The application buildspec.yml files([buildspec.yml](/ECS-blue-green-deployment/ecs-blue/buildspec.yml)) tag the container images with testgreen or testblue, depending on the version of the application they contain.
+The application buildspec.yml files([buildspec.yml](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/ecs-blue/buildspec.yml)) tag the container images with testgreen or testblue, depending on the version of the application they contain.
 
 In this step, you used CodeBuild to create two Docker container images with two different applications.
 
