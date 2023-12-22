@@ -1,9 +1,8 @@
 # Using Amazon ECS blue-green deployment
 
-A blue/green deployment strategy is a method of updating an existing application by deploying a new version and switching over to it once the new deployment is ready. This approach allows you to perform functional testing of the new deployment to ensure the new version is working correctly. It also allows for easy rollbacks to the previous version.
+This project demonstrates a blue/green deployment strategy for deploying a web application using AWS ECS (Elastic Container Service). The blue/green deployment approach allows seamless updates with minimal downtime, ensuring a reliable and scalable deployment process.
 
 
-In this Project we build docker images and deploy using Elastic Container service.
 
 ## Environment Before Deployment:
 
@@ -30,7 +29,7 @@ In this Project we build docker images and deploy using Elastic Container servic
     #!/usr/bin/env bash
     echo ECS_CLUSTER=ecs-cluster >> /etc/ecs/ecs.config
     ```
-    Thsi user data script tells that,Auto Scaling group has been configured in such a way that it will launch container instances that will join an ECS cluster with this name(ecs-cluster)
+    This user data script tells that,Auto Scaling group has been configured in such a way that it will launch container instances that will join an ECS cluster with this name(ecs-cluster)
     
  3. Auto scalling group:
     * Use the latest ECS-optimized Amazon Linux 2 image for 64-bit x86 for the operating system
@@ -56,7 +55,7 @@ In this Project we build docker images and deploy using Elastic Container servic
     
     2. [ecs-green](https://github.com/iamtruptimane/ECS-blue-green-deployment/tree/main/ecs-green)
 
-    _NOte : compress these files to zip and upload in Amazon s3 bucket._
+    _Note : compress these files to zip and upload in Amazon s3 bucket._
 ## Step 1: Logging In to the Amazon Web Services Console
 login to your AWS account using your credentials.
 
