@@ -3,14 +3,6 @@
 This project demonstrates a blue/green deployment strategy for deploying a web application using AWS ECS (Elastic Container Service). The blue/green deployment approach allows seamless updates with minimal downtime, ensuring a reliable and scalable deployment process.
 
 
-
-## Environment Before Deployment:
-
-![Environment Before](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/env_before.png)
-
-## Environment After Deployment
-![Environment After](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/env_after.png)
-
 ## Pre-configured resources for this project:
 
 ## Networking configuration:
