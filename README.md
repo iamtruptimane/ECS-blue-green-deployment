@@ -4,7 +4,7 @@ This project demonstrates a blue/green deployment strategy for deploying a web a
 ![env_before](https://www.pulumi.com/blog/pulumi-kubernetes-operator/blue-green.png)
 
 
-## Pre-configured resources for this project:
+## Architecture of project:
 ![env_after](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/ECS%20bule-green.png)
 
 ## Networking configuration:
