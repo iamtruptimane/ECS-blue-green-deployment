@@ -5,6 +5,7 @@ This project demonstrates a blue/green deployment strategy for deploying a web a
 
 
 ## Pre-configured resources for this project:
+![env_after](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/ECS%20bule-green.png)
 
 ## Networking configuration:
  1. VPC
@@ -411,7 +412,7 @@ By swapping the desired tasks of each service, you have manually replicated a bl
 
 ## Services used:
 All of the services used in this project (most prominently ECS, EC2, CodeBuild, and ECR) are well supported by the AWS command-line interface (CLI), AWS HTTP application programming interface (API), and AWS software development kits (SDK). Using these methods to create, configure, and operate the Amazon ECS and related services can result in fully automated deployments that are customized to your needs and workflow. 
-![env_after](https://github.com/iamtruptimane/ECS-blue-green-deployment/blob/main/img/ECS%20bule-green.png)
+
 
 ## Summary
 In this project, you used AWS CodeBuild along with Amazon Elastic Container Registry to build and store docker images. You then created a new Amazon Elastic Container Service cluster, and the ECS task definitions and ECS services necessary to perform a blue/green deployment. Finally, you verified that the deployments were working, and manually switched from blue to green versions of the application.
